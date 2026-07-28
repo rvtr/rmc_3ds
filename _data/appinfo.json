@@ -393,6 +393,14 @@
                "type":"3ds",
                "faketad":"",
                "system":"3DS"
+            },
+            {
+               "version":"v6.02",
+               "date":"20140311",
+               "additional":"",
+               "type":"cia",
+               "faketad":"",
+               "system":"3DS"
             }
          ]
       },

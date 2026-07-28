@@ -14,4 +14,4 @@ jobs:
         port: 22
         script: |
           cd /var/www
-          ./build_site.sh
+          ./build_site.sh 3ds

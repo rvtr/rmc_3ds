@@ -1,0 +1,85 @@
+<script>
+function warnFaketad() {
+  alert("This TAD is unofficial! The original TAD for this file has been lost, so we recreated it from an SRL using 'maketad.exe'.\n\nI highly suggest testing in an emulator before installing in case of errors.\n\nIf you have the original, please email me at ''lillian@randommeaninglesscharacters.com''.");
+}
+</script>
+<!-- Get first program in CSV for the desired program. The credit/banner/name/origin should be the same across all files, listing multiple items in each line if there are differences. -->
+{% for program in site.data.appinfo.programlist %}
+  {%- if program.slug == page.app -%}
+    {%- if program.published == "true" -%}
+      <div class="devcsv-container">
+      {%- if program.target != "Stage2" -%} 
+        {%- if program.target != "GBA" -%} 
+          <div class="devcsv-preview-container">
+            <div style="">
+              <div class="preview-container colorbox">
+                <div class="preview-flex">
+                  <div class="preview-text">
+                    {{ program.banner }}<br>{{ program.banner_1 }}
+                  </div>
+                  <div class="preview-icon">
+                    <img src="{{ site.imgdir }}{{ program.slug }}/icon.bmp" style="width: 100%;object-fit: cover;">
+                  </div>
+                </div>
+                {%- if program.target == "CARD" -%}
+                <img src="{{ site.imgui }}menu/green/dsi_homemenu_card.png" class="" style="width:100%;">
+                {%- else -%}
+                <img src="{{ site.imgui }}menu/green/dsi_homemenu_nand.png" class="" style="width:100%;">
+                {%- endif -%}
+              </div>
+            </div>
+          </div>
+        {%- else -%}
+          <div class="devcsv-preview-container">
+            <div style="">
+              <div class="preview-container colorbox">
+                <img src="{{ site.imgui }}menu/gbabanner.png" class="" style="width:100%;">
+              </div>
+            </div>
+          </div>
+        {%- endif -%}
+      {%- endif -%}
+      <div class="devcsv-info">
+        <b><u>Origin:</u></b><br>{{ program.origin }}
+      </div>
+      {%- if program.source != "" -%}
+        <div class="devcsv-info1">
+          <b><u>Source code:</u></b><br> - View on <a href="{{ program.source }}" target="_blank">GitHub</a>
+        </div>
+      {%- endif -%}
+      {%- if program.undumped == "true" -%}
+        <div class="devcsv-info2">
+          <b><u>Dumped by:</u></b><br>Currently undumped!
+        </div>
+      {%- else -%}
+        <div class="devcsv-info2">
+          <b><u>Dumped by:</u></b><br>{{ program.credit }}
+        </div>
+        <div class="devcsv-download">
+          <table class="devcsv-table">
+            <tr>
+              <th style="text-align: left;"><u><b>Downloads:</b></u></th>
+            <tr>
+            <tr>
+            {%- if program.target == "CARD" or program.target == "NAND" -%}
+              <th class=""><b>3DS Apps</b></th>
+              {%- for file in program.versions -%}
+              </tr>
+                    <tr>
+                        <td class="tadding"><a href="{{ site.appdir }}{{ program.slug }}/{{ program.slug }}_{{ file.version }}{%- if file.date != '' -%}_{{ file.date }}{%- endif -%}{%- if file.additional != '' -%}_{{ file.additional }}{%- endif -%}.{{ file.type }}">{{ file.version }}{%- if file.date != '' -%}_{{ file.date }}{%- endif -%}{%- if file.additional != '' -%}_{{ file.additional }}{%- endif -%}.{{ file.type }}</a></td>
+              {%- endfor -%}
+            {%- elsif program.target == "PC" -%}
+              <th class=""><b>PC Apps</b></th>
+              {%- for file in program.versions -%}
+              </tr>
+                    <tr>
+                        <td class="tadding"><a href="{{ site.appdir }}{{ program.slug }}/{{ program.slug }}_{{ file.version }}{%- if file.date != '' -%}_{{ file.date }}{%- endif -%}{%- if file.additional != '' -%}_{{ file.additional }}{%- endif -%}.{{ file.type }}">{{ file.version }}{%- if file.date != '' -%}_{{ file.date }}{%- endif -%}{%- if file.additional != '' -%}_{{ file.additional }}{%- endif -%}.{{ file.type }}</a></td>
+              {%- endfor -%}
+            {%- endif -%}
+          </table>
+        </div>
+      {%- endif -%}
+      </div>
+    {%- endif -%}
+  {%- endif -%}
+{%- endfor %}

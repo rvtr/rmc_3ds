@@ -1,0 +1,28 @@
+---
+layout: devinfo
+app: CTR_EVA_SlidePad
+preview: /preview.png
+---
+<details>
+<summary>Test List</summary>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD><PRE>
+// スライドパッド検査
+static uji::seq::TestList SlidePadList[] = {
+    { "SET CONFIG"   ,             {G_MISC,   TID_CHANGE_CONFIG},           uji::eva::wrap::SetSPConfig,                true },
+#ifndef EVA_REPAIR
+    { "CHECK PRODUCT LOG",         {G_NCHECK, TID_NCHECK_PRODUCT_LOG},      uji::eva::procchk::Invoke_CheckProductLog,  true },
+#endif
+    { "INITIALIZE",                {G_KEY,    TID_SLIDEPAD_INITIALIZE},     uji::eva::TestExecuteInitialize,            true },
+    { "ON YOUR MARK",              {G_KEY,    TID_SLIDEPAD_ON_YOUR_MARK},   uji::eva::TestExecuteOnYourMark,            true },
+    { "SAMPLING",                  {G_KEY,    TID_SLIDEPAD_SAMPLING},       uji::eva::TestExecuteSampling,              true },
+    { "CALIBRATION",               {G_KEY,    TID_SLIDEPAD_CALIBRATION},    uji::eva::TestExecuteCalibrate,             true },
+    { "CHECK MAX OUTPUT WIDTH",    {G_KEY,    TID_SLIDEPAD_CHECK_MOW},      uji::eva::TestExecuteCheckMaxOutputWidth,   false },
+    { "CHECK AUTO RESTORATION",    {G_KEY,    TID_SLIDEPAD_CHECK_AR},       uji::eva::TestExecuteCheckAutoRestoration,  false },
+    { "WRITE DATA TO SD",          {G_KEY,    TID_MIC_T_WRITE_DATA_TO_SD},  uji::eva::TestExecuteWriteData2SD,          true },
+    { "SET CAL",                   {G_KEY,    TID_SLIDEPAD_SET_CAL},        uji::eva::TestExecuteSetCalAnalogStick,     true },
+    { "FINALIZE",                  {G_KEY,    TID_SLIDEPAD_FINALIZE},       uji::eva::TestExecuteFinalize,              true },
+    { "WRITE OK LOG SOLO",         {G_LOG,    TID_LOG_WRITE_OK_LOG_SOLO },  uji::eva::TestWriteOkLogSolo,               true },
+    {NULL}                              //ターミネーション
+};
+</PRE></TD></TR></TABLE>
+</details>

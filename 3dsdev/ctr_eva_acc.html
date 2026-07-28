@@ -1,0 +1,16 @@
+---
+layout: devinfo
+app: CTR_EVA_Acc
+preview: /preview.png
+---
+<details>
+<summary>Test List</summary>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD><PRE>
+//加速度検査
+static uji::seq::TestList AccelList[] = {
+    { "WAIT R BUTTON",          {G_CTR_ACCEL,   TID_WAIT_R_BUTTON},                 uji::eva::acc::WaitButtonR,                     true },
+    { "ACCELEROMETER",          {G_CTR_ACCEL,   TID_ACC_TEST},                      uji::eva::acc::AccelerometerTest,               true },
+    {NULL}                              //ターミネーション
+};
+</PRE></TD></TR></TABLE>
+</details>

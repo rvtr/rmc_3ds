@@ -1,0 +1,12 @@
+*.DS_[Ss]tore
+*._*
+.jekyll-metadata
+.jekyll-cache
+_site
+pages
+.idea
+/S3
+3dsdev/release/factory_photos.html
+3dsdev/release/factory-sds.html
+csv_test.html
+json_test.html

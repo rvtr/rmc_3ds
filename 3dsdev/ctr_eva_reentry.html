@@ -1,0 +1,22 @@
+---
+layout: devinfo
+app: CTR_EVA_Reentry
+preview: /preview.png
+---
+
+<details>
+<summary>Test List</summary>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD><PRE>
+//再投入（準備カード）
+static uji::seq::TestList ReentryList[] = {
+    { "LOG EXTRACT CPU BOARD",     {G_LOG,     TID_LOG_EXTRACT_CPU_BOARD},  uji::eva::TestExtractCpuBoard,              true },
+    { "BACK UP RTC CAL",           {G_MISC,    TID_BACK_UP_RTC_CAL},        uji::sec::cal::TestBackUpRtcCalAndWriteStartLog, true },
+    { "ERASE CAL",                 {G_MISC,    TID_ERASE_CAL},              uji::sec::cal::TestEraseCal,                true },
+    { "RESTORE RTC CAL",           {G_MISC,    TID_RESTORE_RTC_CAL},        uji::sec::cal::TestRestoreRtcCal,           true },
+    { "CONFIRM INITIALIZE",        {G_MISC,    TID_CONFIRM_CAL_INITIALIZED},uji::sec::cal::TestConfirmCalInitialized,   true },
+    { "RESET SETTING",             {G_NAPP_IMPORT,  TID_NAPP_IMPORT_RESET_SETTING},  uji::eva::import::TestExecuteResetSetting,  true },
+    { "WRITE OK LOG",              {G_LOG,     TID_LOG_WRITE_OK_LOG_SOLO},  uji::sec::cal::TestWriteOkLog,              true },
+    {NULL}                              //ターミネーション
+};
+</PRE></TD></TR></TABLE>
+</details>

@@ -1,0 +1,32 @@
+---
+layout: devinfo
+app: CTR_EVA_SpAndTp
+preview: /preview.png
+---
+<details>
+<summary>Test List</summary>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD><PRE>
+// スライドパッド＆タッチパネルキャリブレーション
+static uji::seq::TestList SpAndTpTestList[] = {
+#ifndef EVA_REPAIR
+    { "REENTRY",                    {G_MISC,    TID_REENTRY},               uji::eva::TestReentry,                       true },
+    { "SET AUTO MODE",              {G_MISC,    TID_CHANGE_CONFIG},         uji::eva::wrap::SetSPAndTPAutoConfig,        true },
+    { "SET MANUAL MODE",            {G_MISC,    TID_CHANGE_CONFIG},         uji::eva::wrap::SetSPAndTPManualConfig,      false },
+    { "CHECK PRODUCT LOG",          {G_NCHECK, TID_NCHECK_PRODUCT_LOG},      uji::eva::procchk::Invoke_CheckProductLog,  true },
+#endif
+    { "FLICKER",                    {G_LCD,    TID_LCD_FLICKER},             uji::eva::TestLcd::ShowFlickerPattern,      false },
+    { "INITIALIZE",                 {G_KEY,    TID_SLIDEPAD_INITIALIZE},     uji::eva::TestExecuteInitialize,            true },
+    { "ON YOUR MARK",               {G_KEY,    TID_SLIDEPAD_ON_YOUR_MARK},   uji::eva::TestExecuteOnYourMark,            true },
+    { "SAMPLING",                   {G_KEY,    TID_SLIDEPAD_SAMPLING},       uji::eva::TestExecuteSampling,              true },
+    { "CALIBRATION",                {G_KEY,    TID_SLIDEPAD_CALIBRATION},    uji::eva::TestExecuteCalibrate,             true },
+    { "CHECK MAX OUTPUT WIDTH",     {G_KEY,    TID_SLIDEPAD_CHECK_MOW},      uji::eva::TestExecuteCheckMaxOutputWidth,   false },
+    { "CHECK AUTO RESTORATION",     {G_KEY,    TID_SLIDEPAD_CHECK_AR},       uji::eva::TestExecuteCheckAutoRestoration,  false },
+    { "WRITE DATA TO SD",           {G_KEY,    TID_MIC_T_WRITE_DATA_TO_SD},  uji::eva::TestExecuteWriteData2SD,          true },
+    { "SET CAL",                    {G_KEY,    TID_SLIDEPAD_SET_CAL},        uji::eva::TestExecuteSetCalAnalogStick,     true },
+    { "FINALIZE",                   {G_KEY,    TID_SLIDEPAD_FINALIZE},       uji::eva::TestExecuteFinalize,              true },
+    { "TP CALIBRATION",             {G_TP,     TID_TP_CALIBRATION },         uji::eva::TouchPanel::TestTouchPanel,       true },
+    { "WRITE OK LOG",               {G_TP,     TID_TP_WRITE_OK_LOG },        uji::eva::TouchPanel::WriteTouchPanelLog,   true },
+    {NULL}
+};
+</PRE></TD></TR></TABLE>
+</details>

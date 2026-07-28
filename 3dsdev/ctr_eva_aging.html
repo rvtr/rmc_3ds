@@ -1,0 +1,21 @@
+---
+layout: devinfo
+app: CTR_EVA_Aging
+preview: /preview.png
+---
+
+<details>
+<summary>Test List</summary>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD><PRE>
+// エージング
+static uji::seq::TestList AgingList[] = {
+    { "LOG CHECK",              {G_MISC,    TID_LOG_CHECK_PREV_AGING},              uji::eva::AgingImporter::LogCheckPrevAging, true },
+    { "FLICKER",                {G_LCD,     TID_LCD_FLICKER},                       uji::eva::TestLcd::ShowFlickerPattern,      true },
+    { "AGING TEST",             {G_MISC,    TID_AGING_TEST },                       uji::eva::AgingSequencer::RunAging,         true },
+    /*RunAging内で検査結果出力を行うため、以降のTestListは実行されない*/
+    /*ToDo:エージングオプションONの場合、レンダーバッファサイズが異なるため、正常にフリッカ確認表示出来ない*/
+    /*権限ファイルの問題もあり、2013/07/19時点ではTestListを使用していない(フリッカ確認無し)*/
+    {NULL}                              //ターミネーション
+};
+</PRE></TD></TR></TABLE>
+</details>

@@ -1,0 +1,27 @@
+---
+layout: devinfo
+app: CTR_EVA_MicTester
+preview: /preview.png
+---
+
+<details>
+<summary>Test List</summary>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD><PRE>
+// 完成品マイク検査
+using namespace uji::eva::mic_t;
+static uji::seq::TestList MicTesterList[] = {
+    { "CALIBRATE MIC TESTER",   {G_MIC_TESTER,  TID_MIC_T_CALIBRATE_TESTER},        TestExecuteCalibrateTester,         true },
+    { "INITIALIZE",             {G_MIC_TESTER,  TID_MIC_T_INITIALIZE},              TestExecuteInitialize,              true },
+    { "CTR DC OFFSET",          {G_MIC_TESTER,  TID_MIC_T_CTR_DCOFFSET},            TestExecuteCtrModeDcOffset,         true },
+    { "CTR INPUT TEST",         {G_MIC_TESTER,  TID_MIC_T_CTR_INPUT},               TestExecuteCtrModeInput,            true },
+    { "PGA GAIN CALIBRATION",   {G_MIC_TESTER,  TID_MIC_T_CALIBRATE_PGA_GAIN},      TestExecuteCalibratePgaGain,        true },
+    { "SENSITIVITY",            {G_MIC_TESTER,  TID_MIC_T_SENSITIVITY},             TestExecuteSensitivity,             true },
+    { "WRITE DATA TO SD",       {G_MIC_TESTER,  TID_MIC_T_WRITE_DATA_TO_SD},        TestExecuteWriteData2SD,            true },
+    { "SET CAL",                {G_MIC_TESTER,  TID_MIC_T_SET_CAL},                 TestExecuteSetCalPgaGain,           true },
+    { "FINALIZE",               {G_MIC_TESTER,  TID_MIC_T_FINALIZE},                TestExecuteFinalize,                true },
+    { "WRITE PRODUCTION LOG OK",{G_MIC_TESTER,  TID_MIC_T_PRODUCTION_LOG_OK},       TestExecuteWriteProductionLogOk,    true },
+    { "SHOW MAJOR VARIABLE",    {G_MIC_TESTER,  TID_MIC_T_SHOW_MAJOR_VARIABLE},     TestExecuteShowMajorVariable,       true },
+    {NULL}                              //ターミネーション
+};
+</PRE></TD></TR></TABLE>
+</details>

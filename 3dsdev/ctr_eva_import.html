@@ -1,0 +1,61 @@
+---
+layout: devinfo
+app: CTR_EVA_Import
+preview: /preview.png
+---
+<p><b>IMPORT</b> is used to install the final 3DS firmware. </p>
+<details>
+<summary>Test List</summary>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD><PRE>
+// データ書き込み
+// ・TCP COMMUNICATE で、シリアルナンバーを書くことがあるため、TCP COMMUNICATE は CHECK SER NO よりも前に実施
+// ・CLEAR RFU NOR は、TCP COMMUNICATEよりも後に実施（NORにあるネットワーク設定をクリアするため)
+// ・SIGN VALIDATE の後に、WRITE SIGN LOG を呼ぶ
+static uji::seq::TestList ImportList[] = {
+    { "CHECK AGING LOG",    {G_NCHECK,       TID_NCHECK_AGING_LOG},                uji::eva::import::Invoke_CheckAgingLog,                  true  },
+    { "CHECK BLANK SD",     {G_NCHECK,       TID_NCHECK_BLANK_SD},                 uji::eva::procchk::Invoke_CheckBlankSdCard,              true  },
+    { "INITIALIZE",         {G_NAPP_IMPORT,  TID_NAPP_IMPORT_INITIALIZE},          uji::eva::import::TestExecuteInitialize,                 true  },
+    { "STARTUP",            {G_NAPP_IMPORT,  TID_NAPP_IMPORT_STARTUP},             uji::eva::import::TestExecuteStartup,                    true  },
+    { "WRITE START LOG",    {G_NAPP_IMPORT,  TID_NAPP_IMPORT_WRITE_START_LOG},     uji::eva::import::Invoke_WriteStartLog,                  true  },
+    { "CHECK INSTALL STATE",{G_NAPP_IMPORT,  TID_NAPP_IMPORT_CHECK_INSTALL_STATE}, uji::eva::import::Invoke_CheckInstallState,              false },
+    { "WRITE REGION",       {G_NAPP_IMPORT,  TID_NAPP_IMPORT_WRITE_REGION},        uji::eva::import::TestExecuteWriteRegionFromSerial,      false },
+    { "TCP COMMUNICATE",    {G_NAPP_IMPORT,  TID_NAPP_IMPORT_TCP_COMMUNICATE},     uji::eva::import::Invoke_TcpComm,                        true  },
+    { "CHECK HSM LOG",      {G_NAPP_IMPORT,  TID_NAPP_IMPORT_CHECK_HSM_LOG},       uji::eva::import::TestExecuteCheckHsmLog,                HSM_RESTRICT},
+    { "CLEAR RFU NOR",      {G_NCHECK,       TID_NCHECK_CLEAR_RFU_NOR},            uji::eva::procchk::Invoke_ClearRfuNor,                   true  },
+    { "CHECK SER NO",       {G_NCHECK,       TID_NCHECK_SER_NO},                   uji::eva::procchk::Invoke_CheckSerialNo,                 true  },
+    { "CHECK REGION",       {G_NCHECK,       TID_NCHECK_REGION},                   uji::eva::procchk::Invoke_CheckRegion,                   true  },
+    { "VALIDATE SIGN",      {G_NCHECK,       TID_NCHECK_VALIDATE_SIGN},            uji::eva::procchk::Invoke_ValidateSign,                  true  },
+    { "WRITE SIGN LOG",     {G_NAPP_IMPORT,  TID_NAPP_IMPORT_WRITE_SIGN_LOG},      uji::eva::import::Invoke_WriteSignLog,                   true  },
+    { "HARDWARE RESET",     {G_NAPP_IMPORT,  TID_NAPP_IMPORT_HARDWARE_RESET},      uji::eva::import::TestExecuteHardwareReset,              REBOOT     },
+    //----------------------------------------------------------------------------------------------------------------------------------------------
+    // HARDWARE RESET を実行すると一旦再起動します。
+    //----------------------------------------------------------------------------------------------------------------------------------------------
+    { "REINITIALIZE",       {G_NAPP_IMPORT,  TID_NAPP_IMPORT_REINITIALIZE},        uji::eva::import::TestExecuteReinitializeAfterReboot,    REBOOT     },
+    { "EXTRACT AC ADAPTER", {G_NAPP_IMPORT,  TID_NAPP_EXTRACT_AC_ADAPTER},         uji::eva::import::TestExecuteExtractAcAdapter,           false },
+    { "CHECK BATTERY LEVEL",{G_NAPP_IMPORT,  TID_NAPP_CHECK_REMAINING_BATTERY_LV}, uji::eva::import::TestExecuteCheckRemainingBatteryLv,    true  },
+    { "NEEDS CLEANUP"      ,{G_NAPP_IMPORT,  TID_NAPP_IMPORT_NEEDS_CLEANUP},       uji::eva::import::TestExecuteNeedsCleanup,               true  },
+    { "INITIALIZE SDMC",    {G_NAPP_IMPORT,  TID_NAPP_IMPORT_INITIALIZE_SDMC},     uji::eva::import::TestExecuteInitializeSdmc,             PREINSTALL },
+    { "DELETE TEST PROGRAM",{G_NAPP_IMPORT,  TID_NAPP_IMPORT_DELETE_TEST_PROGRAM}, uji::eva::import::TestExecuteDeleteTestProgram,          true  },
+    { "DELETE PREIN TICKET",{G_NAPP_IMPORT,  TID_NAPP_IMPORT_DELETE_PREIN_TICKET}, uji::eva::import::TestExecuteDeletePreinstallTicket,     HSM_RESTRICT},
+    { "RESET SETTING",      {G_NAPP_IMPORT,  TID_NAPP_IMPORT_RESET_SETTING},       uji::eva::import::TestExecuteResetSetting,               true  },
+    { "WRITE HOME MENU ID", {G_NAPP_IMPORT,  TID_NAPP_WRITE_HOME_MENU_ID},         uji::eva::import::TestExecuteWriteHomeMenuId,            true  },
+    { "CHANGE CFG PARAMETERS",{G_NAPP_IMPORT,TID_NAPP_CHANGE_CFG_PARAMETERS},      uji::eva::import::TestExecuteChangeConfigParameters,     CARM  },
+    { "CHANGE OPENING MENU",{G_NAPP_IMPORT,  TID_NAPP_CHANGE_OPENING_MENU},        uji::eva::import::TestExecuteChangeOpeningMenu,          TEST_MENU_BOOT },
+    { "SET LCD MIN BRIGHTNESS",{G_NAPP_IMPORT,  TID_NAPP_SET_LCD_MIN_BRIGHTNESS},  uji::eva::import::TestExecuteSetLcdMinBrightness,        true  },
+    { "IMPORT CIA",         {G_NAPP_IMPORT,  TID_NAPP_IMPORT_CIA},                 uji::eva::import::TestExecuteImportCia,                  true  },
+    {"@"},
+    { "RESTORE LCD BRIGHTNESS",{G_NAPP_IMPORT,  TID_NAPP_RESTORE_LCD_BRIGHTNESS},  uji::eva::import::TestExecuteRestoreLcdBrightness,       true  },
+    { "UPDATE FIRMWARE",    {G_NAPP_IMPORT,  TID_NAPP_UPDATE_FIRMWARE},            uji::eva::import::TestExecuteUpdateFirmware,             true  },
+    { "IMPORT EXT SAVEDATA",{G_NAPP_IMPORT,  TID_NAPP_IMPORT_EXT_SAVEDATA},        uji::eva::import::TestExecuteImportExtSaveData,          PREINSTALL },
+    { "WRITE TWL FONT TABLE", {G_NAPP_IMPORT,TID_NAPP_WRITE_TWL_FONT_TABLE},       uji::eva::import::TestExecuteWriteTWLFontTable,          CHN_KOR    },
+    { "GET APPLICATION INFO", {G_NAPP_IMPORT,TID_NAPP_IMPORT_GET_APPINFO},         uji::eva::import::TestExecuteGetAppInfo,                 true  },
+    { "WAS PROPERLY IMPORTED",{G_NAPP_IMPORT,TID_NAPP_WAS_PROPERLY_IMPORTED},      uji::eva::import::TestExecuteWasProperlyImported,        true  },
+    { "COMPARE PROGRAM INFO", {G_NAPP_IMPORT,TID_NAPP_COMPARE_PROGRAM_INFO},       uji::eva::import::TestExecuteCompareProgramInfo,         true  },
+    { "COMPARE TICKET DB",  {G_NAPP_IMPORT,  TID_NAPP_COMPARE_TICKET_DB},          uji::eva::import::TestExecuteCompareTicketDatabase,      true  },
+    { "COMPARE TITLE LIST", {G_NAPP_IMPORT,  TID_NAPP_COMPARE_TITLE_LIST},         uji::eva::import::TestExecuteCompareTitleList,           false },
+    { "COMPARE PREIN LIST", {G_NAPP_IMPORT,  TID_NAPP_COMPARE_PREIN_LIST},         uji::eva::import::TestExecuteComparePreInstallTitleList, false },
+    { "WRITE OK LOG",       {G_NAPP_IMPORT,  TID_NAPP_IMPORT_WRITE_OK_LOG},        uji::eva::import::TestExecuteWriteOkLog,                 true  },
+    {NULL}                              //ターミネーション
+};
+</PRE></TD></TR></TABLE>
+</details>

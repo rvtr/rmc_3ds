@@ -1,0 +1,58 @@
+---
+layout: devinfo
+app: CTR_EVA_LcdAndKey
+preview: /preview.png
+---
+
+<details>
+<summary>Test List</summary>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD><PRE>
+//ＬＣＤ＆キー検査
+static uji::seq::TestList LcdAndKeyList[] = {
+    { "SET MANUAL MODE",        {G_MISC,        TID_CHANGE_CONFIG},             uji::eva::wrap::SetSPAndTPManualConfig,         true },
+    { "GET MAC ADDRESS",        {G_HWINFO,      TID_GET_MAC_ADDRESS},            uji::eva::TestGetMacAddress,                   true },
+    { "SD READWRITE EZ",        {G_SD,          TID_SD_READWRITE_EZ},           uji::eva::sd::TestSd::ReadWriteTestEz,          true },
+    { "SET CONSTANT CAL",       {G_MISC,        TID_SET_CONSTANT_CAL},          uji::sec::cal::TestSetConstantCal,              true },
+    { "LCD AND BACK LIGHT",     {G_LCD,         TID_LCD_TEST_PATTERN_SET },     uji::eva::TestLcd::ShowTestPattern,             true },
+    { "SLIDEPAD INITIALIZE",    {G_KEY,         TID_SLIDEPAD_INITIALIZE},       uji::eva::TestExecuteInitialize,                true },
+    { "ON YOUR MARK",           {G_KEY,         TID_SLIDEPAD_ON_YOUR_MARK},     uji::eva::TestExecuteOnYourMark,                true },
+    { "SAMPLING",               {G_KEY,         TID_SLIDEPAD_SAMPLING},         uji::eva::TestExecuteSampling,                  false },
+    { "CALIBRATION",            {G_KEY,         TID_SLIDEPAD_CALIBRATION},      uji::eva::TestExecuteCalibrate,                 false },
+    { "CHECK MAX OUTPUT WIDTH", {G_KEY,         TID_SLIDEPAD_CHECK_MOW},        uji::eva::TestExecuteCheckMaxOutputWidth,       true },
+    { "CHECK AUTO RESTORATION", {G_KEY,         TID_SLIDEPAD_CHECK_AR},         uji::eva::TestExecuteCheckAutoRestoration,      true },
+    { "SLIDEPAD WRITE DATA2SD", {G_KEY,         TID_SLIDEPAD_DATA_TO_SD},       uji::eva::TestExecuteWriteData2SD,              true },
+    { "SLIDEPAD SET CAL",       {G_KEY,         TID_SLIDEPAD_SET_CAL},          uji::eva::TestExecuteSetCalAnalogStick,         false },
+    { "SLIDEPAD FINALIZE",      {G_KEY,         TID_SLIDEPAD_FINALIZE},         uji::eva::TestExecuteFinalize,                  true },
+    { "DIGITAL KEY TEST",       {G_KEY,         TID_KEY_DIGITAL },              uji::eva::TestDigitalKey,                       true },
+    { "HOME BUTTON TEST",       {G_KEY,         TID_KEY_HOME },                 uji::eva::mcu::HomeButtonTest,                  true },
+    { "WIFI BUTTON TEST",       {G_KEY,         TID_KEY_WIFI },                 uji::eva::mcu::WifiButtonTest,                  true },
+    { "SLIDE VOLUME CAL",       {G_KEY,         TID_SLIDEVOLUME_CAL },          uji::eva::TestClampVolume,                      true },
+    { "TOUCH PANEL TEST",       {G_TP,          TID_TP_ACCURACY },              uji::eva::wrap::CheckTPAccuracy_LcdKey,         true },
+    { "LED CHECK",              {G_KEY,         TID_LED_CHECK },                uji::eva::mcu::CheckLedOnOff,                   true },
+    { "SOUND CHECK",            {G_SOUND,       TID_L_R_SPEAKER_CHECK },        uji::eva::sound::TestBibiriSound,               false },
+    { "L/R SPEAKER CHECK",      {G_SOUND,       TID_L_R_SPEAKER_CHECK },        uji::eva::sound::TestLeftAndRightSpeakerSin,    true },
+    { "DETECT CLOSE",           {G_MCU,         TID_MCU_DETECT_FOLD_WITH_PIC},  uji::eva::mcu::DetectFoldWithPicture,           true },
+    { "DETECT OPEN",            {G_MCU,         TID_MCU_DETECT_OPEN},           uji::eva::mcu::DetectOpen,                      true },
+    { "STICK TEST",             {G_MISC,        TID_GYRO_AND_ACC_STICK_CHK },   uji::eva::wrap::StickTest,                      true },
+    { "GYRO INIT",              {G_GYRO,        TID_GYRO_C_INITIALIZE},         uji::eva::wrap::GyroInit,                       true },
+    { "GYRO CAL MOTIONLESS",    {G_GYRO,        TID_GYRO_C_CALIB_MOTIONLESS},   uji::eva::wrap::GyroCalibMotionLess,            true },
+    { "GYRO WRITE LOG TO SD",   {G_GYRO,        TID_GYRO_C_WRITE_SDLOG},        uji::eva::wrap::GyroWriteSDLog,                 true },
+    { "GYRO SET CAL",           {G_GYRO,        TID_GYRO_C_SET_CAL},            uji::eva::wrap::GyroSetCal,                     true },
+    { "GYRO AGING TEST",        {G_CTR_ACCEL,   TID_GYRO_AGING_TEST},           uji::eva::wrap::GyroAgingTest,                  true },
+    { "GYRO WRITE OK LOG",      {G_GYRO,        TID_GYRO_C_PRODUCTION_LOG_OK},  uji::eva::wrap::GyroWriteOkLog,                 true },
+    { "CAMERA OPENCHECK ICAM",  {G_CAMERA,      TID_CAMERA_OPENCHECK_ICAM},     uji::eva::camera::TestOpencheckICAM,            true },
+    { "CAMERA OPENCHECK OCAM1", {G_CAMERA,      TID_CAMERA_OPENCHECK_OCAM1},    uji::eva::camera::TestOpencheckOCAM1,           true },
+    { "CAMERA OPENCHECK OCAM2", {G_CAMERA,      TID_CAMERA_OPENCHECK_OCAM2},    uji::eva::camera::TestOpencheckOCAM2,           true },
+    { "MP INIT TEST",           {G_WIRELESS,    TID_WIRELESS_MP},               uji::eva::mp::TestMpInit,                       true },
+#ifndef EVA_REPAIR
+    { "CLEAR RFU NOR",          {G_NCHECK,      TID_NCHECK_CLEAR_RFU_NOR},      uji::eva::procchk::Invoke_ClearRfuNor,          true },
+    { "CHECK RFU NOR",          {G_NCHECK,      TID_NCHECK_RFU_NOR},            uji::eva::procchk::Invoke_CheckRfuNor,          true },
+    { "RESET SETTING",          {G_MISC,        TID_RESET_SETTING},             uji::eva::TestResetSetting,                     true },
+#endif
+    { "WRITE OK LOG SOLO",      {G_LOG,         TID_LOG_WRITE_OK_LOG_SOLO },    uji::eva::TestWriteOkLogSolo,                   true },
+    {NULL}                              //ターミネーション
+};
+</PRE></TD></TR></TABLE>
+</details>
+
+</div>

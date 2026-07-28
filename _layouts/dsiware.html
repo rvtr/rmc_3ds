@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--
+  Fuck trump. 
+  I'm sorry for the US. I'm sorry for every minority.
+  Especially fellow trans people.
+  I hope you are all safe and okay.
+-->
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    {% if site.target == "STRIPPED" -%}
+    <meta name="robots" content="noindex">
+    {%- endif %}
+    <meta property="og:url" content="{{ site.url }}{{ page.url }}">
+    <meta property="og:site_name" content="Random Meaningless Characters (rmc)">
+    <meta property="twitter:card" content="summary_large_image">
+    {% if page.app == null -%}
+      <title>{{ page.title }} | rmc</title>
+      <meta property="og:title" content="{{ page.title }}">
+      {% if page.preview == null -%}
+        <!--<meta property="og:image" content="{{ site.imgdir }}{{ ENTRY.PROGRAM }}/icon.bmp">-->
+      {%- else -%}
+        <meta property="og:image" content="{{ site.imgdir }}{{ page.preview }}">
+        <meta property="twitter:image" content="{{ site.imgdir }}{{ page.preview }}">
+      {%- endif %}
+      <meta name="description" content="{{ page.description }}">
+      <meta property="og:description" content="{{ page.description }}">
+      <meta property="twitter:description" content="{{ page.description }}">
+      <meta property="twitter:title" content="{{ page.title }}">
+      <meta name="keywords" content="dsi, ds, nintendo, dev" />
+    {%- else -%}
+  {%- for program in site.data.appinfo.programlist -%}
+    {%- if program.slug == page.app -%}
+      {%- if program.published == "true" -%}
+        <title>{{ program.title }} | {{ site.title }}</title>
+        <meta property="og:title" content="{{ program.title }}">
+        {% if page.preview == null -%}
+          <meta property="og:image" content="{{ site.imgdir }}{{ program.slug }}/icon.bmp">
+        {%- else -%}
+          <meta property="og:image" content="{{ site.imgdir }}{{ program.slug }}{{ page.preview }}">
+          <meta property="twitter:image" content="{{ site.imgdir }}{{ program.slug }}{{ page.preview }}">
+       {%- endif %}
+        <meta name="description" content="{{ program.desc }} for {{ program.versions[0].system }}">
+        <meta property="og:description" content="{{ program.desc }} for {{ program.versions[0].system }}">
+        <meta property="twitter:description" content="{{ program.desc }} for {{ program.versions[0].system }}">
+        <meta property="twitter:title" content="{{ program.title }}">
+        <meta name="keywords" content="dsi, ds, nintendo, dev, {{ page.app }}" />
+      {%- endif -%}
+    {%- endif -%}
+  {%- endfor -%}
+    {%- endif %}
+    <link rel="icon" type="image/png" href="/icon.png"/>
+    <link rel="stylesheet" type="text/css" href="/assets/css/styledsi.css">
+    <link id="pagestyle" rel="stylesheet" type="text/css" href="">
+    <link rel="alternate" type="application/atom+xml" href="{{ site.url }}/feed.xml">
+    <script src="/assets/bootstrap/js/bootstrap.bundle.js"></script>
+    <script src="/assets/js/main.js"></script>
+
+    <link rel="canonical" href="{{ site.url }}{{ page.url }}">
+    <!-- GRRRR I HATE GOOGLE SAYING MY CANONICALS ARE DUPLICATES!! Please someone smart help me... -->
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+  .float-container {
+    border: 0px solid #fff;
+    font-size: 0;
+  }
+
+  .float-child1 {
+    width: 40%;
+    height: 40%;
+    float: left;
+    padding: 1vw;
+  }
+
+  .float-child2 {
+    width: 20%;
+    height: 40%;
+    float: right;
+    padding: 1vw;
+  }
+</style>
+  </head>
+  <body>
+    {% include navdsi.html %}
+    {% include navncx.html %}
+    <div id="content-wrap">
+    {{ content }}
+    </div>
+  </body>
+  <footer>
+  {% include footerdsi.html %}
+  </footer>
+<script src="/assets/js/theme.js"></script>
+</html>

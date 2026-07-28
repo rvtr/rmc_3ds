@@ -1,0 +1,19 @@
+---
+layout: devinfo
+app: CTR_EVA_AgingImport
+preview: /preview.png
+---
+
+<details>
+<summary>Test List</summary>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD><PRE>
+// エージングインポート
+static uji::seq::TestList AgingImportList[] = {
+    { "LOG CHECK",              {G_MISC,    TID_LOG_CHECK_PREV_AGING},              uji::eva::AgingImporter::LogCheckPrevAging, true },
+    { "FLICKER",                {G_LCD,     TID_LCD_FLICKER},                       uji::eva::TestLcd::ShowFlickerPattern,      true },
+    { "AGING IMPORT",           {G_MISC,    TID_AGING_IMPORT},                      uji::eva::AgingImporter::ImportAndRunAging, true },
+    /*ImportAndRunAging内で検査結果出力を行うため、以降のTestListは実行されない*/
+    {NULL}                              //ターミネーション
+};
+</PRE></TD></TR></TABLE>
+</details>

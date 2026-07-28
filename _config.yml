@@ -1,0 +1,39 @@
+name: rmc
+title: rmc
+url: https://3ds.randommeaninglesscharacters.com
+
+#==================================================================================#
+#                LINKS AND PATHS (for a slightly more modular site)                #
+#==================================================================================#
+#     internal links/paths
+mainurl: https://randommeaninglesscharacters.com
+
+# https://cdn.randommeaninglesscharacters.com/guide/
+imgdir: https://cdn.randommeaninglesscharacters.com/3ds-photos/
+appdir: https://cdn.randommeaninglesscharacters.com/3ds-devapps/
+imgui: https://cdn.randommeaninglesscharacters.com/ui-images-3ds/
+
+#     external links
+# appdir: https://archive.org/download/rmc-dsi_v2/
+decrypt_tad: <a href="https://gist.github.com/rvtr/f1069530129b7a57967e3fc4b30866b4/">decrypt_tad.py</a>
+twlipl: https://github.com/rvtr/TwlIPL/
+twltoolsred: https://github.com/rvtr/TwlToolsRED/
+# Note on github links:
+#   - {{ site.twlipl }}/tree/<commithash>/path/to/file.txt
+#   - {{ site.twlipl }}/tree/<branch>/path/to/file.txt
+
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+  - jekyll-redirect-from # Can we find something better? Redirects break when serving to another computer
+feed:
+  posts_limit: 20
+
+defaults:
+  -
+    scope:
+      path: "3dsdev/release/*"
+      type: "pages"
+    values:
+      identifier: "release-id"

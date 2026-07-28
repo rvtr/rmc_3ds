@@ -1,0 +1,136 @@
+---
+layout: dsiware
+---
+<!-- 
+
+		Do you remember a reaaaaaally long time ago when you first created dsinfo.csv?
+		And remember how everything duplicated a bajillion times?
+
+		This is why there's currently "if ENTRY.PUBLISHED == 'TRUE'"
+		The first entry for a set of programs will have PUBLISHED set to TRUE.
+		That makes sure that only ONE content is made for ONE entry of the same program.
+
+		Let's uhhhh maybe fix that later. Do something that doesn't require needing this PUBLISHED flag.
+		It also prevents unpublished pages from showing content, even though they'll still be generated.
+
+		(I was genuinely confused on what this was for during the last few months and had no idea)
+
+-->
+{% for program in site.data.appinfo.programlist -%}
+  {%- if program.published == "true" -%}
+	{%- if program.slug == page.app -%}
+		<div class="devinfo-container">
+		<!-- MAIN CONTENT -->
+		   <div class="devinfo-container-main colorbox0">
+		      <img src="{{ site.imgui }}menu/green/dsi_widebarnoprompt_u.png" style="width: 100%;position: static;display: block;" class="pixelate">
+		      <div style="background-image: url('{{ site.imgui }}menu/dsi_widepromptnobar.png');background-size:100% 100%;position: static;display: inline-block;width:100%;">
+		      <div class="devinfo-main" style="position:relative;">
+		        <div style="text-align:right;"><a href="https://github.com/rvtr/rvtr.github.io/edit/master/3dsdev/{{ program.slug | downcase }}.html" target="_blank">Edit</a></div>
+		        <h1>{{ program.title }}</h1>
+		        <!-- Generate list for programs sets like TWL EVA -->
+
+					{%- for current in site.data.appinfo.programlist -%}
+					  {%- if current.slug == page.app -%}
+					    {%- if current.category != "" -%}
+					      
+					      {%- for category in site.data.appinfo.categories -%}
+					        {%- if category.slug == current.category -%}
+					        <table class="category-table">
+					          <tr>
+					            <!-- dummystyle gets replaced with the CSS for the current theme in /theme.js -->
+					            <th class="colordiv category-header" style="/*dummystyle*/">
+					            {{ category.title }}
+					            </th>
+					          </tr>
+					          {%- if category.desc != "" -%}
+					            <tr class="category-footer">
+					                <td><i>{{ category.desc }}</i></td>
+					            </tr>
+					          {%- endif -%}
+
+					          {% assign i = 0 %}
+					          <tr>
+					            <td style="line-height: 1.9;">
+
+					              {%- if category.sequence == "true" -%}
+					                {%- for order in category.order -%}
+					                  {%- for other in site.data.appinfo.programlist -%}
+					                    {%- if other.slug == order.slug -%}
+					                      {%- if other.published == "true" -%}
+								               {%- if i != 0 -%}
+								                <span style="white-space: nowrap;">--></span>&#8203;
+								               {%- endif -%}
+								               {%- assign i = i | plus: 1 -%}
+
+										         {%- if other.slug == page.app -%}
+													  <span style="padding:10px;white-space: nowrap;"><b>{%- if other.title_short != "" -%}{{ other.title_short }}{%- else -%}{{ other.title }}{%- endif -%}</b></span>
+													{%- else -%}
+													  <a class="category-list" style="white-space: nowrap;" href="/3dsdev/{{ other.slug | downcase }}.html">{%- if other.title_short != "" -%}{{ other.title_short }}{%- else -%}{{ other.title }}{%- endif -%}</a>
+													{%- endif -%}
+												 {%- endif -%}
+					                    {%- endif -%}
+					                  {%- endfor -%}
+
+					                {%- endfor -%}
+					              {%- else -%}
+					                {%- for other in site.data.appinfo.programlist -%}
+					                  {%- if category.slug == other.category -%}
+					                     {%- if other.published == "true" -%}
+						                    {%- if i != 0 -%}
+						                      -
+						                    {%- endif -%}
+						                    {% assign i = i | plus: 1 %}
+
+					                       {%- if other.slug == page.app -%}
+					                         <span style="padding:10px;white-space: nowrap;"><b>{%- if other.title_short != "" -%}{{ other.title_short }}{%- else -%}{{ other.title }}{%- endif -%}</b></span>
+					                       {%- else -%}
+					                         <a class="category-list" style="white-space: nowrap;" href="/3dsdev/{{ other.slug | downcase }}.html">{%- if other.title_short != "" -%}{{ other.title_short }}{%- else -%}{{ other.title }}{%- endif -%}</a>
+					                       {%- endif -%}
+					                     {%- endif -%}
+					                  {%- endif -%}
+					                {%- endfor -%}
+					              {%- endif -%}
+					            </td>
+					          </tr>
+					        </table>
+					        {%- endif -%}
+					      {%- endfor -%}
+
+					    {%- endif -%}
+					  {%- endif -%}
+					{%- endfor -%}
+
+		        {{ content }}
+		      </div>
+		      </div>
+		      <img src="{{ site.imgui }}menu/green/dsi_widebarnoprompt_d.png" style="width: 100%;display: block;" class="pixelate">
+		   </div>
+
+		<!-- I LOVE INLINE CSS!!!!!!!! -->
+
+		<!-- SUB CONTENT - FOR DESKTOP -->
+		   <div class="devinfo-container-sub colorbox1">
+		      <img src="{{ site.imgui }}menu/green/dsi_thinbarnoprompt_u.png" style="width: 100%;position: static;display: block;" class="pixelate">
+		      <div style="background-image: url('{{ site.imgui }}menu/dsi_thinpromptnobar.png');background-size:100% 100%;position: static;display: inline-block;width:100%;">
+		      <div class="devinfo-sub" style="position:relative;">
+		        {% include devcsv.html %}
+		      </div>
+		      </div>
+		      <img src="{{ site.imgui }}menu/green/dsi_thinbarnoprompt_d.png" style="width: 100%;display:block;" class="pixelate">
+		   </div>
+
+		<!-- SUB CONTENT - FOR MOBILE (SUB2) -->
+		   <div class="devinfo-container-sub2 colorbox1">
+		      <img src="{{ site.imgui }}menu/green/dsi_widebarnoprompt_u.png" style="width: 100%;position: static;display: block;" class="pixelate">
+		      <div style="background-image: url('{{ site.imgui }}menu/dsi_widepromptnobar.png');background-size:100% 100%;position: static;display: inline-block;width:100%;">
+		      <div class="devinfo-sub2" style="position:relative;">
+		        {% include devcsv.html %}
+		      </div>
+		      </div>
+		      <img src="{{ site.imgui }}menu/green/dsi_widebarnoprompt_d.png" style="width: 100%;display:block;" class="pixelate">
+		   </div>
+
+		</div>
+    {%- endif -%}
+  {%- endif -%}
+{%- endfor %}

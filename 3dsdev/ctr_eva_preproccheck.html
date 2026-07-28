@@ -1,0 +1,28 @@
+---
+layout: devinfo
+app: CTR_EVA_PreProcCheck
+preview: /preview.png
+---
+
+<details>
+<summary>Test List</summary>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD><PRE>
+// プリプロセスチェック
+static uji::seq::TestList PreProcCheckList[] = {
+    { "STARTUP",              {G_NCHECK,    TID_NCHECK_STARTUP},          uji::eva::procchk::Invoke_Startup,                    true  },
+    { "CHECK SEQUENCE",       {G_NCHECK,    TID_NCHECK_SEQUENCE},         uji::eva::procchk::Invoke_CheckSequence,              true  },
+    { "CHECK SER NO",         {G_NCHECK,    TID_NCHECK_SER_NO},           uji::eva::procchk::Invoke_CheckSerialNo,              true  },
+    { "CHECK REGION",         {G_NCHECK,    TID_NCHECK_REGION},           uji::eva::procchk::Invoke_CheckRegion,                true  },
+    { "CHECK PRODUCT LOG",    {G_NCHECK,    TID_NCHECK_PRODUCT_LOG},      uji::eva::procchk::Invoke_CheckProductLog,            true  },
+    { "CHECK LAST PROCESS",   {G_NCHECK,    TID_NCHECK_LAST_PROCESS},     uji::eva::procchk::Invoke_CheckProductLogLastProcess, true  },
+    { "CHECK CAL FLAG",       {G_NCHECK,    TID_NCHECK_CAL_FLAG},         uji::sec::cal::TestConfirmCalAdjusted,                true  },
+    { "CLEAR RFU NOR",        {G_NCHECK,    TID_NCHECK_CLEAR_RFU_NOR},    uji::eva::procchk::Invoke_ClearRfuNor,                true  },
+    { "CHECK RFU NOR",        {G_NCHECK,    TID_NCHECK_RFU_NOR},          uji::eva::procchk::Invoke_CheckRfuNor,                true  },
+    { "VALIDATE SIGN",        {G_NCHECK,    TID_NCHECK_VALIDATE_SIGN},    uji::eva::procchk::Invoke_ValidateSign,    FLAG_CHECK_VALIDATE_SIGN  },
+    { "CHECK BLANK SD",       {G_NCHECK,    TID_NCHECK_BLANK_SD},         uji::eva::procchk::Invoke_CheckBlankSdCard,FLAG_CHECK_BLANK_SD       },
+    { "WRITE OK LOG",         {G_NCHECK,    TID_NCHECK_WRITE_LOG},        uji::eva::procchk::Invoke_WriteProductLog,            true  },
+    { "DISPLAY QR",           {G_NCHECK,    TID_NCHECK_DISPLAY_QR},       uji::eva::procchk::Invoke_TestFunc,                   false },
+    {NULL}                              //ターミネーション
+};
+</PRE></TD></TR></TABLE>
+</details>

@@ -1,0 +1,38 @@
+---
+layout: devinfo
+app: CTR_EVA_ProcCheck
+preview: /preview.png
+---
+
+<details>
+<summary>Test List</summary>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD><PRE>
+// プロセスチェック
+static uji::seq::TestList ProcCheckList[] = {
+    { "STARTUP",               {G_NCHECK,    TID_NCHECK_STARTUP},          uji::eva::procchk::Invoke_Startup,                    true },
+//    { "CHECK SEQUENCE",        {G_NCHECK,    TID_NCHECK_SEQUENCE},         uji::eva::procchk::Invoke_CheckSequence,              true },
+    { "CHECK SER NO",          {G_NCHECK,    TID_NCHECK_SER_NO},           uji::eva::procchk::Invoke_CheckSerialNo,              true },
+    { "CHECK REGION",          {G_NCHECK,    TID_NCHECK_REGION},           uji::eva::procchk::Invoke_CheckRegion,                true },
+    { "CHECK PRODUCT LOG",     {G_NCHECK,    TID_NCHECK_PRODUCT_LOG},      uji::eva::procchk::Invoke_CheckProductLog,            true },
+    { "CHECK LAST PROCESS",    {G_NCHECK,    TID_NCHECK_LAST_PROCESS},     uji::eva::procchk::Invoke_CheckProductLogLastProcess, true },
+    { "CHECK IMPORT VERSION",  {G_NCHECK,    TID_NCHECK_IMPORT_VERSION},   uji::eva::procchk::Invoke_CheckProductLogImportVersion, true },
+    { "CHECK PREINSTALL VERSION", {G_NCHECK,    TID_NCHECK_PREINSTALL_VERSION},   uji::eva::procchk::Invoke_CheckProductLogPreInstallVersion, FLAG_CHECK_PRE_INSTALL},
+    { "CHECK NOT PREINSTALLED",   {G_NCHECK,    TID_NCHECK_NOT_PREINSTALLED},     uji::eva::procchk::Invoke_CheckProductLogNotPreInstalled,   !FLAG_CHECK_PRE_INSTALL},
+    { "CHECK NOT EXIST AGING", {G_NCHECK,    TID_NCHECK_NOT_EXIST_AGING},  uji::eva::procchk::Invoke_CheckNotExsistAgingProgram, true },
+    { "CHECK CAL FLAG",        {G_NCHECK,    TID_NCHECK_CAL_FLAG},         uji::sec::cal::TestConfirmCalAdjusted,                true },
+    { "CHECK 3D VOLUME",       {G_NCHECK,    TID_NCHECK_3D_VOLUME},        uji::eva::Test3DVolumeForProcessCheck,                true },
+    { "CLEAR RFU NOR",         {G_NCHECK,    TID_NCHECK_CLEAR_RFU_NOR},    uji::eva::procchk::Invoke_ClearRfuNor,                true },
+    { "CHECK RFU NOR",         {G_NCHECK,    TID_NCHECK_RFU_NOR},          uji::eva::procchk::Invoke_CheckRfuNor,                true },
+    { "VALIDATE SIGN",         {G_NCHECK,    TID_NCHECK_VALIDATE_SIGN},    uji::eva::procchk::Invoke_ValidateSign,               true },
+    { "CHECK BLANK SD",        {G_CTR_NCHECK1, TID_NCHECK_BLANK_SD},       uji::eva::procchk::Invoke_CheckBlankSdCard,      FLAG_CHECK_BLANK_SD},
+    { "CHECK PREINSTALL SD",   {G_CTR_NCHECK1, TID_NCHECK_SD},             uji::eva::procchk::Invoke_CheckPreInstallSdCard, FLAG_CHECK_PRE_INSTALL_SD},
+    { "CHECK NOT INSERT SD",   {G_CTR_NCHECK1, TID_NCHECK_NOT_INSERT_SD},  uji::eva::procchk::Invoke_CheckNoSdCard,              false},
+    { "CHECK SD SIZE",         {G_CTR_NCHECK1, TID_NCHECK_SD_SIZE},        uji::eva::procchk::Invoke_CheckSdCardSize,            true },
+    { "CHECK TP ACCURACY",     {G_TP,        TID_TP_ACCURACY },            uji::eva::wrap::CheckTPAccuracy_ProcCheck,            true },
+    { "CHECK FIRSTLAUNCH FLAG",{G_NCHECK,    TID_NCHECK_FIRSTLAUNCH_FLAG}, uji::eva::procchk::Invoke_CheckFirstLaunchFlag,       true },
+    { "WRITE OK LOG",          {G_NCHECK,    TID_NCHECK_WRITE_LOG},        uji::eva::procchk::Invoke_WriteProductLog,            true },
+    { "DISPLAY QRCODE",        {G_NCHECK,    TID_NCHECK_DISPLAY_QR},       uji::eva::procchk::Invoke_DisplayQRCode,              true },
+    {NULL}                              //ターミネーション
+};
+</PRE></TD></TR></TABLE>
+</details>

@@ -1,0 +1,92 @@
+---
+layout: devinfo
+app: CTR_EVA_Gyroscope
+preview: /preview.png
+---
+
+<details>
+<summary>Test List</summary>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD><PRE>
+// ジャイロ（クライアント）
+extern uji::seq::TestList GyroTestList[] = {
+    { "ATTEST",                 {G_ATTEST,  TID_ATTEST},                    uji::eva::TestAttest,                        },
+    { "ATTEST NG",              {G_ATTEST,  TID_ATTEST_NG},                 uji::eva::TestAttestNg,                      },
+    { "GET PRY",                {G_GYRO,    TID_GYRO_C_GET_PRY},            uji::eva::gyroC::GetPry,                     },
+    { "INITIALIZE",             {G_GYRO,    TID_GYRO_C_INITIALIZE},         uji::eva::gyroC::Initialize,                 },
+    { "GYRO ATTEST",            {G_GYRO,    TID_GYRO_C_ATTEST},             uji::eva::gyroC::ATTEST_C,                   },
+    { "GET PROGRAM VER",        {G_GYRO,    TID_GYRO_C_PROGRAM_VERSION},    uji::eva::gyroC::GetProgramVersion,          },
+    { "CALIBRATE MOTIONLESS",   {G_GYRO,    TID_GYRO_C_CALIB_MOTIONLESS},   uji::eva::gyroC::Calibrate_TTRotMotionless,  },
+    { "GYRO CALIB Z R78",       {G_GYRO,    TID_GYRO_C_CALIB_Z_R78},        uji::eva::gyroC::CalibrateZ_TTRotR78rpm,     },
+    { "GYRO CALIB Z L78",       {G_GYRO,    TID_GYRO_C_CALIB_Z_L78},        uji::eva::gyroC::CalibrateZ_TTRotL78rpm,     },
+    { "GYRO CALIB Y R78",       {G_GYRO,    TID_GYRO_C_CALIB_Y_R78},        uji::eva::gyroC::CalibrateY_TTRotR78rpm,     },
+    { "GYRO CALIB Y L78",       {G_GYRO,    TID_GYRO_C_CALIB_Y_L78},        uji::eva::gyroC::CalibrateY_TTRotL78rpm,     },
+    { "GYRO CALIB X R78",       {G_GYRO,    TID_GYRO_C_CALIB_X_R78},        uji::eva::gyroC::CalibrateX_TTRotR78rpm,     },
+    { "GYRO CALIB X L78",       {G_GYRO,    TID_GYRO_C_CALIB_X_L78},        uji::eva::gyroC::CalibrateX_TTRotL78rpm,     },
+    { "WRITE LOG TO SD",        {G_GYRO,    TID_GYRO_C_WRITE_SDLOG},        uji::eva::gyroC::WriteSDLog,                 },
+    { "SEND TEST DATA",         {G_GYRO,    TID_GYRO_C_SEND_TEST_DATA},     uji::eva::gyroC::SendTestData,               },
+    { "SET CAL",                {G_GYRO,    TID_GYRO_C_SET_CAL},            uji::eva::gyroC::SetCal,                     },
+    { "CHECK CAL SENSITIVITY",  {G_GYRO,    TID_GYRO_C_CHECK_CAL_SENS},     uji::eva::gyroC::CheckCal_Sensitivity,       },
+    { "CHECK CAL ZERO OUTPUT",  {G_GYRO,    TID_GYRO_C_CHECK_CAL_ZERO},     uji::eva::gyroC::CheckCal_ZeroRateOutput,    },
+    { "WRITE PRODUCTION LOG OK",{G_GYRO,    TID_GYRO_C_PRODUCTION_LOG_OK},  uji::eva::gyroC::WriteProductionLogOK,       },
+    {NULL}                              //ターミネーション
+};
+</PRE></TD></TR></TABLE>
+</details>
+
+<details>
+<summary>Test List</summary>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD><PRE>
+// ジャイロ検査
+static uji::seq::TestList GyroMasterTestList[] = {
+    { "CREATE NETWORK",         {G_GYRO_MASTER, TID_GYRO_M_CREATE_NETWORK},         uji::eva::gyroM::CreateNetwork,                 true },
+    { "PREPARE FOR TEST",       {G_GYRO_MASTER, TID_GYRO_M_PREPARE_FOR_TEST},       uji::eva::gyroM::PrepareForTest,                true },
+    { "INITIALIZE",             {G_GYRO_MASTER, TID_GYRO_M_INITIALIZE},             uji::eva::gyroM::CallInitialize,                true },
+    { "CALL GYRO ATTEST",       {G_GYRO_MASTER, TID_GYRO_M_ATTEST},                 uji::eva::gyroM::CallATTEST,                    true },
+    { "CALL GET PROGRAM VER",   {G_GYRO_MASTER, TID_GYRO_M_PROGRAM_VERSION},        uji::eva::gyroM::CallGetProgramVersion,         true },
+    { "CALIBRATE MOTIONLESS",   {G_GYRO_MASTER, TID_GYRO_M_CALIB_MOTIONLESS},       uji::eva::gyroM::CallCalibrate_TTRotMotionless, true },
+    {"@"},
+// Z
+    { "SET TT SPEED 78RPM",     {G_GYRO_MASTER, TID_GYRO_M_SET_TT_SPEED_78RPM},     uji::eva::gyroM::SetTTRotationSpeed78rpm,       true },
+    { "SET TT DIR POSITIVE",    {G_GYRO_MASTER, TID_GYRO_M_SET_TT_DIR_POSITIVE},    uji::eva::gyroM::SetTTRotationDirPositive,      true },
+    { "TT ROTATION Z START"   , {G_GYRO_MASTER, TID_GYRO_M_START_TT_ROTATION},      uji::eva::gyroM::RotateTurntableForZAxisTest,   true },
+    { "WAIT TT SPEED 78RPM",    {G_GYRO_MASTER, TID_GYRO_M_WAIT_TT_SPEED_78RPM},    uji::eva::gyroM::WaitTTRotationSpeed78rpm,      true },
+    { "CALIBRATE Z R78",        {G_GYRO_MASTER, TID_GYRO_M_CALIB_Z_R78},            uji::eva::gyroM::CallCalibrateZ_TTRotR78rpm,    true },
+    { "SET TT DIR NEGATIVE",    {G_GYRO_MASTER, TID_GYRO_M_SET_TT_DIR_NEGATIVE},    uji::eva::gyroM::SetTTRotationDirNegative,      true },
+    { "WAIT TT SPEED 78RPM",    {G_GYRO_MASTER, TID_GYRO_M_WAIT_TT_SPEED_78RPM},    uji::eva::gyroM::WaitTTRotationSpeed78rpm,      true },
+    { "CALIBRATE Z L78",        {G_GYRO_MASTER, TID_GYRO_M_CALIB_Z_L78},            uji::eva::gyroM::CallCalibrateZ_TTRotL78rpm,    true },
+    { "STOP TURNTABLE",         {G_GYRO_MASTER, TID_GYRO_M_STOP_TT_ROTATION},       uji::eva::gyroM::StopTurnTable,                 true },
+    {"@"},
+// Y
+    { "SET TT SPEED 78RPM",     {G_GYRO_MASTER, TID_GYRO_M_SET_TT_SPEED_78RPM},     uji::eva::gyroM::SetTTRotationSpeed78rpm,       true },
+    { "SET TT DIR POSITIVE" ,   {G_GYRO_MASTER, TID_GYRO_M_SET_TT_DIR_POSITIVE},    uji::eva::gyroM::SetTTRotationDirPositive,      true },
+    { "TT ROTATION Y START",    {G_GYRO_MASTER, TID_GYRO_M_START_TT_ROTATION},      uji::eva::gyroM::RotateTurntableForYAxisTest,   true },
+    { "WAIT TT SPEED 78RPM",    {G_GYRO_MASTER, TID_GYRO_M_WAIT_TT_SPEED_78RPM},    uji::eva::gyroM::WaitTTRotationSpeed78rpm,      true },
+    { "CALIBRATE Y R78",        {G_GYRO_MASTER, TID_GYRO_M_CALIB_Y_R78},            uji::eva::gyroM::CallCalibrateY_TTRotR78rpm,    true },
+    { "SET TT DIR NEGATIVE",    {G_GYRO_MASTER, TID_GYRO_M_SET_TT_DIR_NEGATIVE},    uji::eva::gyroM::SetTTRotationDirNegative,      true },
+    { "WAIT TT SPEED 78RPM",    {G_GYRO_MASTER, TID_GYRO_M_WAIT_TT_SPEED_78RPM},    uji::eva::gyroM::WaitTTRotationSpeed78rpm,      true },
+    { "CALIBRATE Y L78",        {G_GYRO_MASTER, TID_GYRO_M_CALIB_Y_L78},            uji::eva::gyroM::CallCalibrateY_TTRotL78rpm,    true },
+    { "STOP TURNTABLE",         {G_GYRO_MASTER, TID_GYRO_M_STOP_TT_ROTATION},       uji::eva::gyroM::StopTurnTable,                 true },
+    {"@"},
+// X
+    { "SET TT SPEED 78RPM",     {G_GYRO_MASTER, TID_GYRO_M_SET_TT_SPEED_78RPM},     uji::eva::gyroM::SetTTRotationSpeed78rpm,       true },
+    { "SET TT DIR POSITIVE" ,   {G_GYRO_MASTER, TID_GYRO_M_SET_TT_DIR_POSITIVE},    uji::eva::gyroM::SetTTRotationDirPositive,      true },
+    { "TT ROTATION X START",    {G_GYRO_MASTER, TID_GYRO_M_START_TT_ROTATION},      uji::eva::gyroM::RotateTurntableForXAxisTest,   true },
+    { "WAIT TT SPEED 78RPM",    {G_GYRO_MASTER, TID_GYRO_M_WAIT_TT_SPEED_78RPM},    uji::eva::gyroM::WaitTTRotationSpeed78rpm,      true },
+    { "CALIBRATE X R78",        {G_GYRO_MASTER, TID_GYRO_M_CALIB_X_R78},            uji::eva::gyroM::CallCalibrateX_TTRotR78rpm,    true },
+    { "SET TT DIR NEGATIVE",    {G_GYRO_MASTER, TID_GYRO_M_SET_TT_DIR_NEGATIVE},    uji::eva::gyroM::SetTTRotationDirNegative,      true },
+    { "WAIT TT SPEED 78RPM",    {G_GYRO_MASTER, TID_GYRO_M_WAIT_TT_SPEED_78RPM},    uji::eva::gyroM::WaitTTRotationSpeed78rpm,      true },
+    { "CALIBRATE X L78",        {G_GYRO_MASTER, TID_GYRO_M_CALIB_X_L78},            uji::eva::gyroM::CallCalibrateX_TTRotL78rpm,    true },
+    { "STOP TURNTABLE",         {G_GYRO_MASTER, TID_GYRO_M_STOP_TT_ROTATION},       uji::eva::gyroM::StopTurnTable,                 true },
+    {"@"},
+
+    { "SET CAL",                {G_GYRO_MASTER, TID_GYRO_M_SET_CAL},                uji::eva::gyroM::CallSetCal,                    true },
+    { "CHECK CAL SENSITIVITY",  {G_GYRO_MASTER, TID_GYRO_M_CHECK_CAL_SENS},         uji::eva::gyroM::CallCheckCal_Sensitivity,      false },
+    { "CHECK CAL ZERO OUTPUT",  {G_GYRO_MASTER, TID_GYRO_M_CHECK_CAL_ZERO},         uji::eva::gyroM::CallCheckCal_ZeroRateOutput,   false },
+
+    { "WRITE PRODUCTION LOG OK",{G_GYRO_MASTER, TID_GYRO_M_PRODUCTION_LOG_OK},      uji::eva::gyroM::CallWriteProductionLogOK,      true },
+    { "WRITE LOG TO SD(MASTER)",{G_GYRO_MASTER, TID_GYRO_M_WRITE_SDLOG_MASTER},     uji::eva::gyroM::CallWriteSDLogByMaster,        true },
+    { "WRITE LOG TO SD",        {G_GYRO_MASTER, TID_GYRO_M_WRITE_SDLOG},            uji::eva::gyroM::CallWriteSDLog,                false },
+    {NULL}                              //ターミネーション
+};
+</PRE></TD></TR></TABLE>
+</details>

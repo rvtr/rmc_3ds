@@ -3,3 +3,52 @@ layout: devinfo
 app: FR_WA
 preview: /preview.png
 ---
+
+    <p><b>FR_WA</b> is a tool to test the WiFi module and microphone. The 3DS will connect to a factory access point, test the connection, and repeat the process two more times. After this the microphone sensitivity is checked.
+    <br><br>
+    In order to run the software, extract the <code>FR_WA</code> folder and <code>lineNumber_FR_WA.txt</code> to the root of the C:\ drive. <code>lineNumber_FR_WA.txt</code> must contain a 4 digit number in plaintext and nothing more, otherwise FR_WA will fail to boot. You may need to open and close the "debug" screen (top left button) before you can control the software.
+    </p>
+
+    <details>
+    <summary>Process list</summary>
+    <TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD><PRE>
+  Inspection_Result_ScanSerialNumber          = true
+  Inspection_Result_CheckDUTConnection        = true
+  Inspection_Result_WriteSerialNumber         = true
+  Inspection_Result_WriteInspectionLogStart   = true
+  Inspection_Sound_CheckMicStability          = true
+  Inspection_Wifi24GHz_GetModuleInfo          = true
+  Inspection_Wifi24GHz_C1_Wifi24GHzConnect    = true
+  Inspection_Wifi24GHz_C1_UDPErrorRateRx      = true
+  Inspection_Wifi24GHz_C1_RSSIRx              = true
+  Inspection_Wifi24GHz_C1_UDPErrorRateTx      = true
+  Inspection_Wifi24GHz_C1_RSSITx              = true
+  Inspection_Wifi24GHz_C1_Wifi24GHzDisconnect = true
+  Inspection_Wifi24GHz_C2_Wifi24GHzConnect    = false
+  Inspection_Wifi24GHz_C2_UDPErrorRateRx      = false
+  Inspection_Wifi24GHz_C2_RSSIRx              = false
+  Inspection_Wifi24GHz_C2_UDPErrorRateTx      = false
+  Inspection_Wifi24GHz_C2_RSSITx              = false
+  Inspection_Wifi24GHz_C2_Wifi24GHzDisconnect = false
+  Inspection_Wifi24GHz_C3_Wifi24GHzConnect    = false
+  Inspection_Wifi24GHz_C3_UDPErrorRateRx      = false
+  Inspection_Wifi24GHz_C3_RSSIRx              = false
+  Inspection_Wifi24GHz_C3_UDPErrorRateT       = false
+  Inspection_Wifi24GHz_C3_RSSITx              = false
+  Inspection_Wifi24GHz_C3_Wifi24GHzDisconnect = false
+  Inspection_Sound_CheckMicCalibration        = true
+  Inspection_RFU_RSSIRx                       = true
+  Inspection_Sound_CheckMicSensitivity        = true
+  Inspection_Sound_CheckSpeakerOut            = true
+  Inspection_Result_WriteInspectionLogOKNG    = true
+    </PRE></TD></TR></TABLE>
+    </details>
+
+  <div class="screenshot">
+    <img src="{{ site.imgdir }}{{ page.app }}/Camera                  14MP-9PG_20120201_001233.jpg">
+  </div>
+  <div class="screenshot">
+    <img src="{{ site.imgdir }}{{ page.app }}/FR_WA_0.09-main.png">
+    <img src="{{ site.imgdir }}{{ page.app }}/FR_WA_0.09-ver.png">
+    <img src="{{ site.imgdir }}{{ page.app }}/FR_WA_0.15-ver.png">
+  </div>

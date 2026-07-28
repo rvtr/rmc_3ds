@@ -3,3 +3,54 @@ layout: devinfo
 app: CR_WA
 preview: /preview.png
 ---
+
+    <p><b>CR_WA</b> appears to be the same as <a href="/3dsdev/fr_wa.html">FR_WA</a>, but instead has the addition of the <code>Inspection_Result_CheckInspectionItems</code> and <code>Inspection_Result_RegistryInspectionItems</code> functions, and it does not check the microphone stability (<code>Inspection_Sound_CheckMicStability</code>). The program works by connecting to a factory access point, testing the connection, disconnecting, then testing the microphone.
+    <br><br>Both versions of this software target "KTR" consoles (n3DS)<br><br>
+    In order to run the software, extract the <code>CR_WA</code> folder and <code>lineNumber_CR_WA.txt</code> to the root of the C:\ drive. <code>lineNumber_CR_WA.txt</code> must contain a 4 digit number in plaintext and nothing more, otherwise CR_WA will fail to boot. You may need to open and close the "debug" screen (top left button) before you can control the software.
+    </p>
+
+    <details>
+    <summary>Process list</summary>
+    <TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD><PRE>
+  Inspection_Result_ScanSerialNumber          = true
+  Inspection_Result_CheckSerialNumber         = true
+  Inspection_Result_CheckDUTConnection        = true
+  Inspection_Result_WriteSerialNumber         = true
+  Inspection_Result_WriteInspectionLogStart   = true
+  Inspection_Sound_CheckMicStability          = false
+  Inspection_Wifi24GHz_GetModuleInfo          = true
+  Inspection_Wifi24GHz_C1_Wifi24GHzConnect    = true
+  Inspection_Wifi24GHz_C1_RSSIRx              = true
+  Inspection_Wifi24GHz_C1_UDPErrorRateRx      = true
+  Inspection_Wifi24GHz_C1_RSSITx              = true
+  Inspection_Wifi24GHz_C1_UDPErrorRateTx      = true
+  Inspection_Wifi24GHz_C1_Wifi24GHzDisconnect = true
+  Inspection_Wifi24GHz_C2_Wifi24GHzConnect    = false
+  Inspection_Wifi24GHz_C2_RSSIRx              = false
+  Inspection_Wifi24GHz_C2_UDPErrorRateRx      = false
+  Inspection_Wifi24GHz_C2_RSSITx              = false
+  Inspection_Wifi24GHz_C2_UDPErrorRateTx      = false
+  Inspection_Wifi24GHz_C2_Wifi24GHzDisconnect = false
+  Inspection_Wifi24GHz_C3_Wifi24GHzConnect    = false
+  Inspection_Wifi24GHz_C3_RSSIRx              = false
+  Inspection_Wifi24GHz_C3_UDPErrorRateRx      = false
+  Inspection_Wifi24GHz_C3_RSSITx              = false
+  Inspection_Wifi24GHz_C3_UDPErrorRateTx      = false
+  Inspection_Wifi24GHz_C3_Wifi24GHzDisconnect = false
+  Inspection_Sound_CheckMicCalibration        = true
+  Inspection_RFU_RSSIRx                       = true
+  Inspection_Sound_CheckMicSensitivity        = true
+  Inspection_Sound_CheckSpeakerOut            = true
+  Inspection_Result_CheckInspectionItems      = true
+  Inspection_Result_RegistryInspectionItems   = false
+  Inspection_Result_WriteInspectionLogOKNG    = true
+    </PRE></TD></TR></TABLE>
+    </details>
+  <div class="screenshot">
+    <img src="{{ site.imgdir }}{{ page.app }}/CR_WA_1.11a-main.png">
+    <img src="{{ site.imgdir }}{{ page.app }}/CR_WA_1.11a-ver.png">
+  </div>
+  <div class="screenshot">
+    <img src="{{ site.imgdir }}{{ page.app }}/CR_WA_1.02-main.png">
+    <img src="{{ site.imgdir }}{{ page.app }}/CR_WA_1.02-ver.png">
+  </div>

@@ -3,3 +3,34 @@ layout: devinfo
 app: BS_W
 preview: /preview.png
 ---
+
+    <p><b>BS_W</b> is a tool to sign per-3DS files. This is a variant of <a href="/3dsdev/bsl_w.html">BSL_W</a>, and appears functionally the same, with added <code>CheckRegion</code> and <code>CollectOptionalData</code> functions. BS_W is run just before the firmware install process (CTR EVA IMPORT). The tool starts by connecting to a 3DS on a factory server. It reads, signs and then writes the SecureInfo, LocalFriendCodeSeed, and movable.sed in NAND. It then quits and allows IMPORT to install the firmware.
+    <br><br>This version targets "JAN" consoles (n2DS XL)<br><br>
+    In order to run the software, extract the <code>BS_W</code> folder and <code>lineNumber.txt</code> to the root of the C:\ drive. <code>lineNumber.txt</code> must contain a 4 digit number in plaintext and nothing more, otherwise BS_W will fail to boot. You may need to open and close the "debug" screen (top left button) before you can control the software.
+    </p>
+
+    <details>
+    <summary>Process list</summary>
+    <TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD><PRE>
+  ReadBarcode         = false
+  TCPConnectionWait   = true
+  TCPConnectionCTR    = true
+  WriteSerialNumber   = false
+  RequestData         = true
+  GetSign             = true
+  WriteSign           = true
+  ValidateSign        = true
+  CheckRegion         = true
+  CollectOptionalData = false
+  SendData            = true
+    </PRE></TD></TR></TABLE>
+    </details>
+  <div class="screenshot">
+    <img src="{{ site.imgdir }}{{ page.app }}/BS_W-3ds.jpg">
+    <img src="{{ site.imgdir }}{{ page.app }}/BS_W-cart.jpg">
+    <img src="{{ site.imgdir }}{{ page.app }}/BS_W-setup.jpg">
+  </div>
+  <div class="screenshot">
+    <img src="{{ site.imgdir }}{{ page.app }}/BS_W_2.13-main.png">
+    <img src="{{ site.imgdir }}{{ page.app }}/BS_W_2.13-ver.png">
+  </div>

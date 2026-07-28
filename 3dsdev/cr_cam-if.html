@@ -3,3 +3,41 @@ layout: devinfo
 app: CR_CAM-IF
 preview: /preview.png
 ---
+
+    <p><b>CR_CAM-IF</b> is a tool to test the camera. It appears to be the same as <a href="/3dsdev/fr_cam-if.html">FR_CAM-IF</a>, but for a different model of 3DS. The 3DS will be made to take photos of color charts, where an operator will confirm that the camera has taken the photo correctly.
+    <br><br>
+    In order to run the software, extract the <code>CR_CAM-IF</code> folder and <code>lineNumber_CR_CAM-IF.txt</code> to the root of the C:\ drive. <code>lineNumber_CR_CAM-IF.txt</code> must contain a 4 digit number in plaintext and nothing more, otherwise CR_CAM-IF will fail to boot. You may need to open and close the "debug" screen (top left button) before you can control the software.
+    </p>
+
+    <details>
+    <summary>Process list</summary>
+    <TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD><PRE>
+  Inspection_Result_ScanSerialNumber        = false
+  Inspection_Result_CheckDUTConnection      = true
+  Inspection_Result_WriteSerialNumber       = false
+  Inspection_Result_WriteInspectionLogStart = true
+  Inspection_Camera_IN_GetTestImageCHART    = true
+  Inspection_Camera_IN_CheckOpticalAxisGaps = true
+  Inspection_Camera_IN_CheckResolution      = true
+  Inspection_Camera_IN_CheckColor           = true
+  Inspection_Camera_IN_GetTestImageWHITE    = true
+  Inspection_Camera_IN_CheckStain           = true
+  Inspection_Camera_IN_DeleteTestImage      = false
+  Inspection_Camera_OL_GetTestImageCHART    = true
+  Inspection_Camera_OL_CheckOpticalAxisGaps = true
+  Inspection_Camera_OL_CheckResolution      = true
+  Inspection_Camera_OL_CheckColor           = true
+  Inspection_Camera_OL_GetTestImageWHITE    = true
+  Inspection_Camera_OL_CheckStain           = true
+  Inspection_Camera_OL_DeleteTestImage      = false
+  Inspection_Camera_OR_GetTestImageCHART    = true
+  Inspection_Camera_OR_CheckOpticalAxisGaps = true
+  Inspection_Camera_OR_CheckResolution      = true
+  Inspection_Camera_OR_CheckColor           = true
+  Inspection_Camera_OR_GetTestImageWHITE    = true
+  Inspection_Camera_OR_CheckStain           = true
+  Inspection_Camera_OR_DeleteTestImage      = false
+  Inspection_Result_VisualInspect           = true
+  Inspection_Result_WriteInspectionLogOKNG  = true
+    </PRE></TD></TR></TABLE>
+    </details>

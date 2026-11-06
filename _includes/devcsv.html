@@ -63,14 +63,16 @@ function warnFaketad() {
             <tr>
             {%- if program.target == "CARD" or program.target == "NAND" -%}
               <th class=""><b>3DS Apps</b></th>
-              {%- for file in program.versions -%}
+              {% assign sorted_versions = program.versions | sort_by_version: "version" %}
+              {% for file in sorted_versions -%}
               </tr>
                     <tr>
                         <td class="tadding"><a href="{{ site.appdir }}{{ program.slug }}/{{ program.slug }}_{{ file.version }}{%- if file.date != '' -%}_{{ file.date }}{%- endif -%}{%- if file.additional != '' -%}_{{ file.additional }}{%- endif -%}.{{ file.type }}">{{ file.version }}{%- if file.date != '' -%}_{{ file.date }}{%- endif -%}{%- if file.additional != '' -%}_{{ file.additional }}{%- endif -%}.{{ file.type }}</a></td>
               {%- endfor -%}
             {%- elsif program.target == "PC" -%}
               <th class=""><b>PC Apps</b></th>
-              {%- for file in program.versions -%}
+              {% assign sorted_versions = program.versions | sort_by_version: "version" %}
+              {% for file in sorted_versions -%}
               </tr>
                     <tr>
                         <td class="tadding"><a href="{{ site.appdir }}{{ program.slug }}/{{ program.slug }}_{{ file.version }}{%- if file.date != '' -%}_{{ file.date }}{%- endif -%}{%- if file.additional != '' -%}_{{ file.additional }}{%- endif -%}.{{ file.type }}">{{ file.version }}{%- if file.date != '' -%}_{{ file.date }}{%- endif -%}{%- if file.additional != '' -%}_{{ file.additional }}{%- endif -%}.{{ file.type }}</a></td>
